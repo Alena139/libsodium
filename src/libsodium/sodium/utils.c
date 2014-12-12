@@ -205,26 +205,26 @@ sodium_munlock(void * const addr, const size_t len)
 #endif
 }
 
-int
-_sodium_alloc_init(void)
-{
-#if defined(_SC_PAGESIZE)
-    long page_size_ = sysconf(_SC_PAGESIZE);
-    if (page_size_ > 0L) {
-        page_size = (size_t) page_size_;
-    }
-#elif defined(_WIN32)
-    SYSTEM_INFO si;
-    GetSystemInfo(&si);
-    page_size = (size_t) si.dwPageSize;
-#endif
-    if (page_size < CANARY_SIZE) {
-        abort(); /* LCOV_EXCL_LINE */
-    }
-    randombytes_buf(canary, sizeof canary);
-
-    return 0;
-}
+// int
+// _sodium_alloc_init(void)
+// {
+// #if defined(_SC_PAGESIZE)
+//     long page_size_ = sysconf(_SC_PAGESIZE);
+//     if (page_size_ > 0L) {
+//         page_size = (size_t) page_size_;
+//     }
+// #elif defined(_WIN32)
+//     SYSTEM_INFO si;
+//     GetSystemInfo(&si);
+//     page_size = (size_t) si.dwPageSize;
+// #endif
+//     if (page_size < CANARY_SIZE) {
+//         abort(); /* LCOV_EXCL_LINE */
+//     }
+//     randombytes_buf(canary, sizeof canary);
+// 
+//     return 0;
+// }
 
 static inline size_t
 _page_round(const size_t size)
